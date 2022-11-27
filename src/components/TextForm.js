@@ -24,9 +24,9 @@ export default function TextForm(props) {
         </div>
 
         <div className="container my-2">
-            <h1>Your Text Summary</h1>
+            <h2>Your Text Summary</h2>
             <p>
-                your word count {text.split(' ').length-1} and character count {text.length}
+                your word count <b>{text.split(' ').length-1}</b> and character count <b>{text.length}</b>
             </p>
         </div>
        
