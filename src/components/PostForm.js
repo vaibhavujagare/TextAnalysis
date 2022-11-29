@@ -1,7 +1,24 @@
 import React from 'react'
-import axios from 'axios'
+
+
+
 export default function PostForm() {
+  const getAPI = () =>{
+    fetch('https://jsonplaceholder.typicode.com/todos')
+    .then(response => response.json())
+    .then(json => console.log(json))
+  }
+
   return (
-    <div>PostForm</div>
+    <>
+    <div className="container">
+    <button className="btn btn-success" onClick={getAPI}>
+      Fetch API
+    </button>
+
+    </div>
+    </>
   )
 }
+
+// text = request.POST["text"]
