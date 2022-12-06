@@ -5,31 +5,61 @@ import About from './components/About';
 import Navbar from './components/Navbar';
 // import PostForm from './components/PostForm';
 import TextForm from './components/TextForm';
-
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  // Link
+} from "react-router-dom";
 
 function App() {
-  const  [mode, setMode] = useState('light');
 
-  const toggleMode = ()=>{
-    if (mode ==='light'){
+  const [text, setText] = useState('Enable Mode');
+
+  const handleMode = (getMode) => {
+    setMode(getMode)
+    document.body.style.backgroundColor = colorDict[getMode];
+    console.log(getMode)
+
+  }
+  const [mode, setMode] = useState('light');
+
+  const colorDict = {
+    'dark': '#000000',
+    'light': '#FFFFFF',
+    'red': '#FF0000',
+    'cyan': '#00FFFF',
+    'yellow': '#FFFF00',
+    'green': '#008000',
+    'blue': '#0000FF',
+    'gray': '#808080'
+  }
+
+  const toggleMode = () => {
+    if (mode === 'light') {
       setMode('dark');
-      document.body.style.backgroundColor='#020008';
+      setText('Disiable Mode');
+      document.body.style.backgroundColor = colorDict['dark'];
     }
-    else{
+    else {
       setMode('light');
-      document.body.style.backgroundColor='white';
+      setText('Enable Mode');
+      document.body.style.backgroundColor = colorDict['light'];
     }
-
-
   }
 
   return (
-
     <>
-      <Navbar mode={mode} toggleMode={toggleMode}></Navbar>
-      <TextForm heading='Enter the text to analyze' mode={mode}  ></TextForm>
-      <About mode={mode}></About>
+      <Router>
+        <Navbar mode={mode} toggleMode={toggleMode} handleMode={handleMode} text={text}></Navbar>
+        <Routes>
 
+          <Route path="/About.js" element={<About mode={mode}/>}/>          
+          <Route path="/" element={<TextForm heading='Enter the text to analyze' mode={mode} />}/>       
+          
+        </Routes>
+      </Router>
+     
     </>
   );
 }
